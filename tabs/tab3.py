@@ -32,7 +32,7 @@ CONTENT_STYLE={
 
 # Data
 path = 'https://raw.githubusercontent.com/garycl/AirportData/master'
-df_airports = pd.read_parquet(f'https://raw.githubusercontent.com/garycl/AirportApp/master/data/NPIAS_Airports.parquet')
+df_airports = pd.read_parquet(f'{path}/data/NPIAS_Airports.parquet')
 df_airports = df_airports[df_airports['SvcLvl_FY23']=='P'].sort_values(by='LocID')
 airport_options = [
     {"label": str(df_airports.loc[df_airports.LocID==airport,'LocID'].values[0]), "value": str(airport)}
