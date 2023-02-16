@@ -32,7 +32,7 @@ CONTENT_STYLE={
 
 # Data
 path = 'https://raw.githubusercontent.com/garycl/AirportData/master'
-df_airports = pd.read_parquet(f'{path}/data/NPIAS_Airports.parquet')
+df_airports = pd.read_parquet(f'{path}/NPIAS_Airports.parquet')
 df_airports = df_airports[df_airports['SvcLvl_FY23']=='P'].sort_values(by='LocID')
 airport_options = [
     {"label": str(df_airports.loc[df_airports.LocID==airport,'LocID'].values[0]), "value": str(airport)}
@@ -82,9 +82,9 @@ def create_layout(n_clicks, start_year, end_year, origin, time):
         max_year = max(start_year, end_year)
         data  = pd.DataFrame()
         for year in range(min_year, max_year+1):
-            mkt = pd.read_parquet(f'{path}/data/db1b_mkt/dbmkt_{year}.parquet')
+            mkt = pd.read_parquet(f'{path}/db1b_mkt/dbmkt_{year}.parquet')
             mkt = mkt.rename(columns={'Passengers':'PAX'})
-            tix = pd.read_parquet(f'{path}/data/db1b_tix/dbtix_{year}.parquet')
+            tix = pd.read_parquet(f'{path}/db1b_tix/dbtix_{year}.parquet')
             for i in origin:
                 tdf = get_data(mkt, tix, time, i)
                 tdf = get_poo(tdf)
